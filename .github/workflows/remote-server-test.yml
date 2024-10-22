@@ -2,11 +2,11 @@ name: Run Tests on Remote Server for PR
 
 on:
   workflow_dispatch:
-  inputs:
-    branch:
-      description: 'Branch to test'
-      required: true
-      default: 'main'
+    inputs:
+      branch:
+        description: 'Branch to test'
+        required: true
+        default: 'main'
 
 jobs:
   remote-test:
