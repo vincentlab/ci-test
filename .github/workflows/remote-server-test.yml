@@ -6,9 +6,7 @@ on:
     branch:
       description: 'Branch to test'
       required: true
-      default: 'main'pull_request:
-    branches:
-      - main
+      default: 'main'
 
 jobs:
   remote-test:
