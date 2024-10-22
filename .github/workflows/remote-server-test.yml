@@ -1,0 +1,27 @@
+name: Run Tests on Remote Server for PR
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  remote-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Set up SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: Pull and run tests on PR code from remote server
+      run: |
+        ssh -o StrictHostKeyChecking=no user@remote_server "
+          cd /path/to/your/project || git clone https://github.com/your-username/your-repo.git /path/to/your/project;
+          cd /path/to/your/project;
+          git fetch origin;
+          git fetch origin pull/${{ github.event.pull_request.number }}/head:pr-branch;
+          git checkout pr-branch;
+          ./run-tests.sh"
+
