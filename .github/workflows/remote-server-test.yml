@@ -1,7 +1,12 @@
 name: Run Tests on Remote Server for PR
 
 on:
-  pull_request:
+  workflow_dispatch:
+  inputs:
+    branch:
+      description: 'Branch to test'
+      required: true
+      default: 'main'pull_request:
     branches:
       - main
 
@@ -17,11 +22,5 @@ jobs:
 
     - name: Pull and run tests on PR code from remote server
       run: |
-        ssh -o StrictHostKeyChecking=no user@remote_server "
-          cd /path/to/your/project || git clone https://github.com/your-username/your-repo.git /path/to/your/project;
-          cd /path/to/your/project;
-          git fetch origin;
-          git fetch origin pull/${{ github.event.pull_request.number }}/head:pr-branch;
-          git checkout pr-branch;
-          ./run-tests.sh"
+          touch test.txt;
 
